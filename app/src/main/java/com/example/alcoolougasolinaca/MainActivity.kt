@@ -21,9 +21,8 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navController, startDestination = "calcular") {
                     composable("calcular") { Calcular(navController) }
 
-                    composable("ListaPostos/{posto}") { backStackEntry ->
-                        val posto = backStackEntry.arguments?.getString("posto") ?: ""
-                        ListaPostos(navController, posto)
+                    composable("ListaPostos") {
+                        ListaPostos(navController)
                     }
                 }
             }

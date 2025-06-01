@@ -20,18 +20,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.alcoolougasolinaca.data.Coordenadas
+import com.example.alcoolougasolinaca.data.Posto
+
 
 @Composable
-
 fun Calcular(navController: NavHostController) {
     var alcool by rememberSaveable { mutableStateOf("") }
     var gasolina by rememberSaveable { mutableStateOf("") }
     var nomePosto by rememberSaveable { mutableStateOf("") }
     var switchLigado by rememberSaveable { mutableStateOf(true) }
     var resultado by rememberSaveable { mutableStateOf("") }
-
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -103,16 +106,45 @@ fun Calcular(navController: NavHostController) {
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = {
-                if (nomePosto.isNotBlank()) {
-                    navController.navigate("ListaPostos/${nomePosto}")
-                }
-            }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Ver Posto no Mapa")
+
+            Button(
+                onClick = {
+                    if (nomePosto.isNotBlank()) {
+                        val precoAlcool = alcool.toFloatOrNull()
+                        val precoGasosa = gasolina.toFloatOrNull()
+                        val postosExistentes = getListaPostosJSON(context).toMutableList()
+                        val novoPosto = Posto(
+                            nomePosto,
+                            coordenadas = Coordenadas(41.40338, 2.17403),
+                            alcool = precoAlcool ?: 0f,
+                            gasolina = precoGasosa ?: 0f,
+
+
+                        )
+
+                        postosExistentes.add(novoPosto)
+                        saveListaPostosJSON(context, postosExistentes)
+
+                        navController.navigate("ListaPostos")
+                    }
+                }
+            ) {
+                Text("Salvar Posto")
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Button(
+                onClick = {
+                    navController.navigate("ListaPostos")
+                }
+            ) {
+                Text("Veja os postos!")
+            }
         }
+
     }
 }
+
 
