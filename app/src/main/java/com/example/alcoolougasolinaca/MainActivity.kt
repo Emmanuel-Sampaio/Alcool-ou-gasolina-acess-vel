@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alcoolougasolinaca.ui.theme.AlcoolOuGasolinaCaTheme
 import com.example.alcoolougasolinaca.view.Calcular
+import com.example.alcoolougasolinaca.view.EditarPosto
 import com.example.alcoolougasolinaca.view.ListaPostos
 
 class MainActivity : ComponentActivity() {
@@ -19,11 +20,18 @@ class MainActivity : ComponentActivity() {
             AlcoolOuGasolinaCaTheme {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "calcular") {
-                    composable("calcular") { Calcular(navController) }
+                    composable("calcular") {
+                        Calcular(navController)
+                    }
 
                     composable("ListaPostos") {
                         ListaPostos(navController)
                     }
+                    composable("EditarPosto/{nome}") { backStackEntry ->
+                        val nome = backStackEntry.arguments?.getString("nome") ?: ""
+                        EditarPosto(nome, navController)
+                    }
+
                 }
             }
         }

@@ -41,7 +41,7 @@ fun ListaPostos(navController: NavHostController) {
                 title = { Text("Lista de Postos") },
                 navigationIcon = {
                     Button(onClick = {
-                        navController.popBackStack()
+                        navController.navigate("calcular")
                     }) {
                         Text("< VOLTAR")
                     }
@@ -75,6 +75,25 @@ fun ListaPostos(navController: NavHostController) {
                         " \nValor da gasolina " + posto.gasolina,
                         modifier = Modifier.padding(16.dp)
                     )
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Button(onClick = {
+
+                            navController.navigate("EditarPosto/${posto.nome}")
+                        }) {
+                            Text("Editar")
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Button(onClick = {
+                            listaDePostos.remove(posto)
+                            saveListaPostosJSON(context, listaDePostos)
+
+                        }, colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)) {
+                            Text("Excluir")
+                        }
+                    }
                 }
             }
         }
