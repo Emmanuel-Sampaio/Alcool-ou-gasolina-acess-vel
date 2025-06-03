@@ -72,7 +72,8 @@ fun ListaPostos(navController: NavHostController) {
                     Text(
                         text = posto.nome +
                         " \nValor do alcool " + posto.alcool +
-                        " \nValor da gasolina " + posto.gasolina,
+                        " \nValor da gasolina " + posto.gasolina +
+                        " \nCoordenadas " + posto.coordenadas.latitude + " " + posto.coordenadas.longitude ,
                         modifier = Modifier.padding(16.dp)
                     )
                     Row (
