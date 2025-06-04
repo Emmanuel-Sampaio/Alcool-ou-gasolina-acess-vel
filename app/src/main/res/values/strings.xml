@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">alcool ou gasolina ca</string>
+    <string name="app_name">Álcool ou Gasolina</string>
+    <string name="preco_alcool">Preço do álcool (R$)</string>
+    <string name="preco_gasolina">Preço da gasolina (R$)</string>
+    <string name="nome_posto">Nome do Posto</string>
+    <string name="calcular">Calcular</string>
+    <string name="melhor_usar_alcool">Melhor usar Álcool</string>
+    <string name="melhor_usar_gasolina">Melhor usar Gasolina</string>
+    <string name="salvar_posto">Salvar Posto</string>
+    <string name="veja_postos">Veja os postos!</string>
+    <string name="lista_postos">Lista de Postos</string>
+    <string name="voltar">Voltar</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
+    <string name="data_cadastro">Data de cadastro</string>
 </resources>

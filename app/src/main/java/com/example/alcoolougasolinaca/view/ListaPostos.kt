@@ -2,9 +2,10 @@ package com.example.alcoolougasolinaca.view
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
+
 import android.net.Uri
-import android.util.Log
+import java.text.SimpleDateFormat
+import java.util.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -73,7 +74,8 @@ fun ListaPostos(navController: NavHostController) {
                         text = posto.nome +
                         " \nValor do alcool " + posto.alcool +
                         " \nValor da gasolina " + posto.gasolina +
-                        " \nCoordenadas " + posto.coordenadas.latitude + " " + posto.coordenadas.longitude ,
+                        " \nCoordenadas " + posto.coordenadas.latitude + " " + posto.coordenadas.longitude +
+                        " \nData de cadastro: " + posto.dataCadastro,
                         modifier = Modifier.padding(16.dp)
                     )
                     Row (
@@ -111,6 +113,7 @@ fun postoToJson(posto: Posto): JSONObject {
     json.put("coordenadas", coordenadasJson)
     json.put("alcool", posto.alcool)
     json.put("gasolina", posto.gasolina)
+    json.put("dataCadastro", posto.dataCadastro)
     return json
 }
 
@@ -122,7 +125,8 @@ fun jsonToPosto(json: JSONObject): Posto {
     val coordenadasJson = json.getJSONObject("coordenadas")
     val latitude = coordenadasJson.getDouble("latitude")
     val longitude = coordenadasJson.getDouble("longitude")
-    return Posto(nome, Coordenadas(latitude, longitude), alcool, gasolina )
+    val dataCadastro = json.getString("dataCadastro")
+    return Posto(nome, Coordenadas(latitude, longitude), alcool, gasolina, dataCadastro )
 }
 
 fun saveListaPostosJSON(context: Context, listaPostos: List<Posto>) {

@@ -27,6 +27,9 @@ import androidx.navigation.NavHostController
 import com.example.alcoolougasolinaca.data.Coordenadas
 import com.example.alcoolougasolinaca.data.Posto
 import com.google.android.gms.location.LocationServices
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 @Composable
@@ -114,18 +117,25 @@ fun Calcular(navController: NavHostController) {
 
             Button(
                 onClick = {
+
                     val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context as Activity)
                     fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                         if (nomePosto.isNotBlank() && location != null) {
                             val precoAlcool = alcool.toFloatOrNull()
                             val precoGasosa = gasolina.toFloatOrNull()
                             val postosExistentes = getListaPostosJSON(context).toMutableList()
+
+                            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                            val dataAtual = sdf.format(Date())
+
                             val novoPosto = Posto(
                                 nome = nomePosto,
                                 coordenadas = Coordenadas(location.latitude, location.longitude),
                                 alcool = precoAlcool ?: 0f,
-                                gasolina = precoGasosa ?: 0f
+                                gasolina = precoGasosa ?: 0f,
+                                dataCadastro = dataAtual
                             )
+
 
                             postosExistentes.add(novoPosto)
                             saveListaPostosJSON(context, postosExistentes)
