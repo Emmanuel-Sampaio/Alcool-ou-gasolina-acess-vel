@@ -4,6 +4,7 @@
     <string name="preco_gasolina">Preço da gasolina (R$)</string>
     <string name="nome_posto">Nome do Posto</string>
     <string name="calcular">Calcular</string>
+    <string name="coordenadas">Coordenadas</string>
     <string name="melhor_usar_alcool">Melhor usar Álcool</string>
     <string name="melhor_usar_gasolina">Melhor usar Gasolina</string>
     <string name="salvar_posto">Salvar Posto</string>

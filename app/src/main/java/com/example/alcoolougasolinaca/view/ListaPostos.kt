@@ -16,8 +16,10 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.alcoolougasolinaca.R
 import com.example.alcoolougasolinaca.data.Coordenadas
 import com.example.alcoolougasolinaca.data.Posto
 import org.json.JSONObject
@@ -29,7 +31,6 @@ fun ListaPostos(navController: NavHostController) {
     val context = LocalContext.current
     val listaDePostos = remember { mutableStateListOf<Posto>() }
 
-
     LaunchedEffect(Unit) {
         val postosSalvos = getListaPostosJSON(context)
         listaDePostos.clear()
@@ -39,18 +40,17 @@ fun ListaPostos(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Lista de Postos") },
+                title = { Text(stringResource(R.string.lista_postos)) },
                 navigationIcon = {
                     Button(onClick = {
                         navController.navigate("calcular")
                     }) {
-                        Text("< VOLTAR")
+                        Text("< ${stringResource(R.string.voltar)}")
                     }
                 }
             )
         }
-    )
-    { innerPadding ->
+    ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -71,30 +71,33 @@ fun ListaPostos(navController: NavHostController) {
                         .padding(vertical = 8.dp)
                 ) {
                     Text(
-                        text = posto.nome +
-                        " \nValor do alcool " + posto.alcool +
-                        " \nValor da gasolina " + posto.gasolina +
-                        " \nCoordenadas " + posto.coordenadas.latitude + " " + posto.coordenadas.longitude +
-                        " \nData de cadastro: " + posto.dataCadastro,
+                        text = buildString {
+                            append(posto.nome)
+                            append("\n${stringResource(R.string.preco_alcool)} ${posto.alcool}")
+                            append("\n${stringResource(R.string.preco_gasolina)} ${posto.gasolina}")
+                            append("\n${stringResource(R.string.coordenadas)} ${posto.coordenadas.latitude}, ${posto.coordenadas.longitude}")
+                            append("\n${stringResource(R.string.data_cadastro)} ${posto.dataCadastro}")
+                        },
                         modifier = Modifier.padding(16.dp)
                     )
-                    Row (
+                    Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
-                    ){
+                    ) {
                         Button(onClick = {
-
                             navController.navigate("EditarPosto/${posto.nome}")
                         }) {
-                            Text("Editar")
+                            Text(stringResource(R.string.editar))
                         }
                         Spacer(modifier = Modifier.width(16.dp))
-                        Button(onClick = {
-                            listaDePostos.remove(posto)
-                            saveListaPostosJSON(context, listaDePostos)
-
-                        }, colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)) {
-                            Text("Excluir")
+                        Button(
+                            onClick = {
+                                listaDePostos.remove(posto)
+                                saveListaPostosJSON(context, listaDePostos)
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
+                        ) {
+                            Text(stringResource(R.string.excluir))
                         }
                     }
                 }
