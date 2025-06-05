@@ -14,8 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -45,11 +47,23 @@ fun ListaPostos(navController: NavHostController) {
                     Button(onClick = {
                         navController.navigate("calcular")
                     }) {
-                        Text("< ${stringResource(R.string.voltar)}")
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.icon_voltar),
+                                contentDescription = stringResource(R.string.voltar_icon),
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(stringResource(R.string.voltar))
+                        }
                     }
                 }
             )
         }
+
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
@@ -97,7 +111,19 @@ fun ListaPostos(navController: NavHostController) {
                             },
                             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
                         ) {
-                            Text(stringResource(R.string.excluir))
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Text(stringResource(R.string.excluir))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Icon(
+                                    painter = painterResource(id = R.drawable.delete_icon),
+                                    contentDescription = stringResource(R.string.excluir_icon),
+                                    modifier = Modifier.size(20.dp)
+                                )
+
+                            }
                         }
                     }
                 }

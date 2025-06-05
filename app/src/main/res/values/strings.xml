@@ -14,4 +14,10 @@
     <string name="editar">Editar</string>
     <string name="excluir">Excluir</string>
     <string name="data_cadastro">Data de cadastro</string>
+    <string name="salvar_edicao">Salvar Alteração</string>
+    <string name="icone_tanque_combustivel">Icone de tanque de combustivel</string>
+    <string name="icone_bomba_combustivel">Icone bomba de combustivel</string>
+    <string name="voltar_icon">Icone de voltar</string>
+    <string name="excluir_icon">Icone de lixo</string>
+
 </resources>

@@ -8,11 +8,18 @@
     <string name="calcular">Calculate</string>
     <string name="melhor_usar_alcool">Better to use Alcohol</string>
     <string name="melhor_usar_gasolina">Better to use Gasoline</string>
-    <string name="salvar_posto">Save Station</string>
-    <string name="veja_postos">See Stations</string>
-    <string name="lista_postos">Station List</string>
+    <string name="salvar_posto">Save Gas Station</string>
+    <string name="veja_postos">See Gas Stations</string>
+    <string name="lista_postos">Gas Station List</string>
     <string name="voltar">Back</string>
     <string name="editar">Edit</string>
     <string name="excluir">Delete</string>
     <string name="data_cadastro">Registration date</string>
+    <string name="salvar_edicao">Save Change</string>
+    <string name="icone_tanque_combustivel">Icon Fuel</string>
+    <string name="icone_bomba_combustivel">Icon Fuel Pump</string>
+    <string name="voltar_icon">Back Icon</string>
+    <string name="excluir_icon">Trash Icon</string>
+
+
 </resources>

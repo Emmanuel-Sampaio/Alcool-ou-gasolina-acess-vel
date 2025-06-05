@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -23,9 +25,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.alcoolougasolinaca.R
 import com.example.alcoolougasolinaca.data.Coordenadas
@@ -65,16 +70,40 @@ fun Calcular(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(24.dp),
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(150.dp))
-
+            Spacer(modifier = Modifier.height(50.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.tanque_combustivel),
+                    contentDescription = stringResource(R.string.icone_tanque_combustivel),
+                    modifier = Modifier.size(48.dp),
+                    tint = Color.White
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(
+                    text = stringResource(R.string.app_name),
+                    fontSize = 32.sp
+                )
+            }
+            Spacer(modifier = Modifier.padding(25.dp))
             TextField(
                 value = alcool,
                 onValueChange = { alcool = it },
                 label = { Text(stringResource(R.string.preco_alcool)) },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.bomba_combustivel),
+                        contentDescription = stringResource(R.string.icone_bomba_combustivel),
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -83,7 +112,14 @@ fun Calcular(navController: NavHostController) {
                 value = gasolina,
                 onValueChange = { gasolina = it },
                 label = { Text(stringResource(R.string.preco_gasolina)) },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.bomba_combustivel),
+                        contentDescription = stringResource(R.string.icone_bomba_combustivel),
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -122,7 +158,7 @@ fun Calcular(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
+
                 Button(onClick = {
                     val fusedLocationClient =
                         LocationServices.getFusedLocationProviderClient(context as Activity)
@@ -149,7 +185,9 @@ fun Calcular(navController: NavHostController) {
                             navController.navigate("ListaPostos")
                         }
                     }
-                }) {
+                },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Text(stringResource(R.string.salvar_posto))
                 }
 
@@ -157,10 +195,11 @@ fun Calcular(navController: NavHostController) {
 
                 Button(onClick = {
                     navController.navigate("ListaPostos")
-                }) {
+                },
+                    modifier = Modifier.fillMaxWidth()) {
                     Text(stringResource(R.string.veja_postos))
                 }
-            }
+
         }
     }
 }
